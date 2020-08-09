@@ -56,7 +56,7 @@ namespace StartTileBackgroundColor.Data {
     public class DesktopApplicationTile: AbstractTile {
 
         [XmlAttribute(AttributeName = "DesktopApplicationLinkPath")]
-        public string desktopApplicationLinkPath { get; set; }
+        public string desktopApplicationLinkPath { get; set; } = string.Empty;
 
     }
 

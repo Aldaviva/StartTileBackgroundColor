@@ -16,11 +16,6 @@ using VisualElementsManifest.Data;
 
 namespace StartTileBackgroundColor {
 
-    /// <remarks>
-    /// <para>After adding or modifying a VisualElementsManifest XML file for a program, its tile will not immediately update in Start. You have to clear the tile cache for the update to take effect.</para>
-    /// <para>You can clear the tile cache with WinAero Tweaker (https://winaero.com/download.php?view.1796) using the Reset Live Tile Cache tweak.</para>
-    /// <para>You can also clear the tile cache manually by setting a registry value (<c>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ImmersiveShell\StateStore\ResetCache</c>) to <c>0x1</c> and restarting Explorer (https://winaero.com/blog/clear-live-tile-cache-windows-10/).</para>
-    /// </remarks>
     internal static class Program {
 
         private static readonly Logger LOGGER = LogManager.GetCurrentClassLogger();
@@ -52,10 +47,11 @@ namespace StartTileBackgroundColor {
 
                 LOGGER.Debug("Parsing shortcuts");
                 IEnumerable<Task> tasks = desktopApplicationTiles.Select(tile => Task.Run(() => {
-                    ShellLinkFile shortcut = ShellLinkFile.Load(Environment.ExpandEnvironmentVariables(tile.desktopApplicationLinkPath));
+                    string shortcutFilename = Environment.ExpandEnvironmentVariables(tile.desktopApplicationLinkPath);
+                    ShellLinkFile shortcut = ShellLinkFile.Load(shortcutFilename);
 
                     if (shortcut.getTarget() is string destination) {
-                        LOGGER.Trace("{0}: {1}", Path.GetFileNameWithoutExtension(tile.desktopApplicationLinkPath), destination);
+                        LOGGER.Trace("{0}: {1}", Path.GetFileNameWithoutExtension(shortcutFilename), destination);
 
                         string manifestFilename = Path.ChangeExtension(destination, ".VisualElementsManifest.xml");
                         if (!File.Exists(manifestFilename)) {
@@ -65,11 +61,13 @@ namespace StartTileBackgroundColor {
                             applicationManifest.VisualElements.BackgroundColor = TILE_BACKGROUND_COLOR;
 
                             visualElementsManifestEditor.Save(applicationManifest, manifestFilename);
+                            File.SetLastWriteTime(shortcutFilename, DateTime.Now);
+
                             LOGGER.Info("Saved {0}", manifestFilename);
                             Interlocked.Increment(ref savedManifestCount);
                         }
                     } else {
-                        LOGGER.Warn("No destination in {0}", tile.desktopApplicationLinkPath);
+                        LOGGER.Warn("No destination in {0}", shortcutFilename);
                     }
                 }));
 

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartTileBackgroundColor", "StartTileBackgroundColor\StartTileBackgroundColor.csproj", "{3F7ED845-2E12-48C9-82BE-402A0BA544C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{CA800E86-CC77-452B-8D1F-D2F8FB5AB537}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F7ED845-2E12-48C9-82BE-402A0BA544C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F7ED845-2E12-48C9-82BE-402A0BA544C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F7ED845-2E12-48C9-82BE-402A0BA544C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F7ED845-2E12-48C9-82BE-402A0BA544C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA800E86-CC77-452B-8D1F-D2F8FB5AB537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA800E86-CC77-452B-8D1F-D2F8FB5AB537}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA800E86-CC77-452B-8D1F-D2F8FB5AB537}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA800E86-CC77-452B-8D1F-D2F8FB5AB537}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3FB6A880-50CF-4C15-B3AA-4168E69FD3B8}
+	EndGlobalSection
+EndGlobal

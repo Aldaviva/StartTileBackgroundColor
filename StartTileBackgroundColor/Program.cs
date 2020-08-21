@@ -7,9 +7,9 @@ using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Threading;
 using System.Threading.Tasks;
+using LnkReader;
 using Microsoft.PowerShell;
 using NLog;
-using Shellify;
 using StartTileBackgroundColor.Data;
 using VisualElementsManifest;
 using VisualElementsManifest.Data;
@@ -48,9 +48,9 @@ namespace StartTileBackgroundColor {
                 LOGGER.Debug("Parsing shortcuts");
                 IEnumerable<Task> tasks = desktopApplicationTiles.Select(tile => Task.Run(() => {
                     string shortcutFilename = Environment.ExpandEnvironmentVariables(tile.desktopApplicationLinkPath);
-                    ShellLinkFile shortcut = ShellLinkFile.Load(shortcutFilename);
+                    var shortcut = Lnk.OpenLnk(shortcutFilename);
 
-                    if (shortcut.getTarget() is string destination) {
+                    if (shortcut.BasePath is string destination) {
                         LOGGER.Trace("{0}: {1}", Path.GetFileNameWithoutExtension(shortcutFilename), destination);
 
                         string manifestFilename = Path.ChangeExtension(destination, ".VisualElementsManifest.xml");
@@ -62,7 +62,7 @@ namespace StartTileBackgroundColor {
 
                             visualElementsManifestEditor.Save(applicationManifest, manifestFilename);
                             File.SetLastWriteTime(shortcutFilename, DateTime.Now);
-
+                            
                             LOGGER.Info("Saved {0}", manifestFilename);
                             Interlocked.Increment(ref savedManifestCount);
                         }

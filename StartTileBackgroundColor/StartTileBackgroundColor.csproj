@@ -9,10 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LnkReader" Version="1.0.1" />
     <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.0.3" />
-    <PackageReference Include="NLog" Version="4.7.3" />
-    <PackageReference Include="System.Threading.Tasks.Dataflow" Version="4.11.1" />
+    <PackageReference Include="NLog" Version="4.7.4" />
+    <PackageReference Include="securifybv.ShellLink" Version="0.1.0" />
   </ItemGroup>
 
   <ItemGroup>
